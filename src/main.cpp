@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include "LanguageModel.h"
 
 struct Arguments {
     double alpha = 0.0;     
@@ -73,11 +74,8 @@ Arguments parseArguments(int argc, char* argv[]) {
 int main(int argc, char* argv[]) {
     try {
         Arguments args = parseArguments(argc, argv);
-
-        std::cout << "alpha  = " << args.alpha << '\n'
-                  << "k      = " << args.k << '\n'
-                  << "file   = " << args.filename << '\n'
-                  << "length = " << args.length << '\n';
+        LanguageModel model(args.k, args.filename);
+        model.print(std::cout);
     } catch (const std::exception& e) {
         std::cerr << "slm: " << e.what() << '\n';
         return 1;
