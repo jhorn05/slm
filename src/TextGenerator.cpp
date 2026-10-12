@@ -2,8 +2,8 @@
 
 #include <vector>
 
-TextGenerator::TextGenerator(const LanguageModel& model)
-    : model_(model), rng_(std::random_device{}()) {}
+TextGenerator::TextGenerator(const LanguageModel& model, double alpha)
+    : model_(model), alpha_(alpha), rng_(std::random_device{}()) {}
 
 std::string TextGenerator::chooseStart() {
     std::vector<std::string> kgrams;
@@ -24,15 +24,25 @@ std::string TextGenerator::generate(int length) {
 
     while (output.size() < target) {
         const std::map<char, int>& counts = model_.nextCharCounts(current);
-        if (counts.empty()) {
-            break;
-        }
 
         std::vector<char> chars;
-        std::vector<int> weights;
-        for (const auto& entry : counts) {
-            chars.push_back(entry.first);
-            weights.push_back(entry.second);
+        std::vector<double> weights;
+
+        if (alpha_ > 0) {
+            for (char c : model_.alphabet()) {
+                auto it = counts.find(c);
+                int n = (it == counts.end()) ? 0 : it->second;
+                chars.push_back(c);
+                weights.push_back(n + alpha_);
+            }
+        } else {
+            if (counts.empty()) {
+                break;
+            }
+            for (const auto& entry : counts) {
+                chars.push_back(entry.first);
+                weights.push_back(entry.second);
+            }
         }
 
         std::discrete_distribution<std::size_t> dist(weights.begin(), weights.end());

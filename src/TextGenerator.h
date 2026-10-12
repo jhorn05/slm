@@ -8,11 +8,12 @@
 
 class TextGenerator {
 public:
-    explicit TextGenerator(const LanguageModel& model);
+    TextGenerator(const LanguageModel& model, double alpha);
     std::string generate(int length);
 
 private:
     const LanguageModel& model_;
+    double alpha_;
     std::mt19937 rng_;
 
     std::string chooseStart();

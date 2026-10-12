@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
     try {
         Arguments args = parseArguments(argc, argv);
         LanguageModel model(args.k, args.filename);
-        TextGenerator generator(model);
+        TextGenerator generator(model, args.alpha);
         std::cout << generator.generate(args.length) << '\n';
     } catch (const std::exception& e) {
         std::cerr << "slm: " << e.what() << '\n';
