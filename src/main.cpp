@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 #include "LanguageModel.h"
+#include "TextGenerator.h"
 
 struct Arguments {
     double alpha = 0.0;     
@@ -75,7 +76,8 @@ int main(int argc, char* argv[]) {
     try {
         Arguments args = parseArguments(argc, argv);
         LanguageModel model(args.k, args.filename);
-        model.print(std::cout);
+        TextGenerator generator(model);
+        std::cout << generator.generate(args.length) << '\n';
     } catch (const std::exception& e) {
         std::cerr << "slm: " << e.what() << '\n';
         return 1;
