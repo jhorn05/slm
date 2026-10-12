@@ -8,12 +8,12 @@ on a text file and uses it to generate new "text" – an *Artificial Idiot*.
 The model works on *k-grams*: strings of exactly *k* consecutive characters
 (any characters, including spaces and newlines).
 
-**Training.** The program slides a window of length *k* over the training text and counts
+**Training:** The program slides a window of length *k* over the training text and counts
 
-- how often each k-gram occurs, and
+- how often each k-gram occurs.
 - for each k-gram, how often each character immediately follows it.
 
-**Generating.**
+**Generating:**
 
 1. Choose a starting k-gram at random, weighted by how often each k-gram occurs, and output it.
 2. Look at the characters that followed the current k-gram in the training text and
@@ -25,7 +25,7 @@ Without a pseudocount, the generator stops early if it reaches a k-gram that was
 followed by any character (one that only occurs at the very end of the text),
 so the output may be shorter than requested.
 
-**Pseudocount.** With the option `-a`, a pseudocount *a* is added to the count of every
+**Pseudocount:** With the option `-a`, a pseudocount *a* is added to the count of every
 character in the alphabet (all distinct characters in the training text).
 The probability of character *c* after k-gram *w* then becomes
 
@@ -52,7 +52,7 @@ slm [-a pseudocount] k file length
 
 | Argument | Meaning |
 |---|---|
-| `-a pseudocount` | optional, a non-negative number added to every count (default 0) |
+| `-a pseudocount` | a non-negative number added to every count (default 0) (optional) |
 | `k` | positive integer, the k-gram length |
 | `file` | the training text |
 | `length` | number of characters to output, including the starting k-gram (at least k) |
@@ -73,7 +73,7 @@ now; ber; foriveree, st core
 ```
 
 A larger *k* gives output that looks more like real English, since each character
-depends on a longer context. A small *k* gives mostly nonsense words.
+depends on a longer context. A small *k* gives mostly words that don't really make sense.
 
 ### Errors
 
