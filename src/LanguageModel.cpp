@@ -16,22 +16,23 @@ LanguageModel::LanguageModel(int k, const std::string& filename) : k_(k) {
 }
 
 void LanguageModel::train(const std::string& text) {
-    // Alphabet: every distinct character in the text
     for (char c : text) {
         alphabet_.insert(c);
     }
 
     const std::size_t k = static_cast<std::size_t>(k_);
 
-    // Slide a window of length k over the text
     for (std::size_t i = 0; i + k <= text.size(); ++i) {
         std::string kgram = text.substr(i, k);
         ++kgramCount_[kgram];
 
-        // If there is a character after this window, count it
         if (i + k < text.size()) {
             ++nextCharCount_[kgram][text[i + k]];
         }
+    }
+    if (nextCharCount_.empty()) {
+        throw std::runtime_error("training text is too short: it must contain more than "
+                                    + std::to_string(k_) + " characters");
     }
 }
 
