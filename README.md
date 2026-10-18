@@ -61,7 +61,7 @@ now; ber; foriveree, st core
 
 
 A larger k gives output that looks more like real English, since each character
-depends on a longer context. A small *k* gives mostly words that don't really make sense.
+depends on a longer context. A small k gives mostly words that don't really make sense.
 
 ### Errors
 
