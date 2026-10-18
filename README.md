@@ -64,8 +64,8 @@ $ ./slm 2 moby_dick.txt 20
 he in the Jonacts st
 
 $ ./slm 6 moby_dick.txt 200
-as int de ne, of thim malso most:’s in the andimpleg of withe coat a rom the beliale huddlyinariek
-like ofick; al ing handamor foge wilim What st, twerriandirmory, some uponsail thattle sit youl of
+of Captain circle upon the upper
+stubbornness. And all he beef was enough we known aside! Stand clap the tutelary guard the snugly housekeepers, when I start beats; I told me that there with all the
 
 $ ./slm -a 0.01 3 moby_dick.txt 40
 ess (loong
